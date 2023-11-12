@@ -13,13 +13,18 @@ MonoBehaviour:
   m_Name: "Folder structure \u2013 example 2"
   m_EditorClassIdentifier: 
   folderStructures:
-  - name: Prefabs
+  - nameParent: Art
     childrenFolder:
-    - Model
-    - Player
-    - UI
-  - name: Shader
-    childrenFolder: []
-  - name: Material
-    childrenFolder:
+    - Materials
+    - Models
+    - Music
+    - Prefabs
+    - Sound
     - Textures
+    - UI
+  - nameParent: Levels
+    childrenFolder: []
+  - nameParent: Src
+    childrenFolder:
+    - Framework
+    - Shaders

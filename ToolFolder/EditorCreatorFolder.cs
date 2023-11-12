@@ -6,6 +6,8 @@ namespace ToolFolder
     public class EditorCreatorFolder : EditorWindow
     {
         public SCO_FolderStructure folderStruct;
+        private Vector2 scrollPosition;
+
         [MenuItem("EditorTool/Create Folder Structure")]
         public static void ShowWindow()
         {
@@ -13,34 +15,40 @@ namespace ToolFolder
         }
         private void OnGUI()
         {
-            Vector2 scrollPosition = Vector2.zero;
-            GUILayout.Label("Structure Folder", EditorStyles.boldLabel);
-            GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Folder Structure File:", EditorStyles.boldLabel);
-            folderStruct = EditorGUILayout.ObjectField(folderStruct, typeof(SCO_FolderStructure), true) as SCO_FolderStructure;
-            GUILayout.EndHorizontal();
-            EditorGUILayout.Space(3);
-
-            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
-            scrollPosition = GUILayout.BeginScrollView(scrollPosition, false, true,GUILayout.MinHeight(100));
-            EditorGUILayout.LabelField("Folder Structure Preview");
-            ShowStructurePreview(folderStruct);
-            GUILayout.EndScrollView();
-            GUILayout.EndVertical();
-            EditorGUILayout.Space(10);
-            GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Create Folders"))
+            using (var scrollView = new EditorGUILayout.ScrollViewScope(scrollPosition))
             {
-                if (folderStruct != null)
+                scrollPosition = scrollView.scrollPosition;
+
+                GUILayout.Label("Structure Folder", EditorStyles.boldLabel);
+
+                GUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Folder Structure File:", EditorStyles.boldLabel);
+                folderStruct = EditorGUILayout.ObjectField(folderStruct, typeof(SCO_FolderStructure), true) as SCO_FolderStructure;
+                GUILayout.EndHorizontal();
+                EditorGUILayout.Space(3);
+
+                GUILayout.BeginVertical(EditorStyles.helpBox);
+
+                EditorGUILayout.LabelField("Folder Structure Preview");
+                ShowStructurePreview(folderStruct);
+
+                GUILayout.EndVertical();
+                EditorGUILayout.Space(10);
+
+                GUILayout.BeginHorizontal();
+                if (GUILayout.Button("Create Folders", GUILayout.MinHeight(50)))
                 {
-                    CreateStructure();
+                    if (folderStruct != null)
+                    {
+                        CreateStructure();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Cannot create folders without a Folder Structure File");
+                    }
                 }
-                else
-                {
-                    Debug.LogWarning("Cannot create folders without a Folder Structure File");
-                }
+                GUILayout.EndHorizontal();
             }
-            EditorGUILayout.EndHorizontal();
         }
         private void CreateStructure()
         {
