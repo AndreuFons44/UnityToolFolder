@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec878e5378dac24cb45392159616c01, type: 3}
+  m_Name: "Folder structure \u2013 example 1"
+  m_EditorClassIdentifier: 
+  folderStructures:
+  - nameParent: Art
+    childrenFolder:
+    - Materials
+    - Models
+    - Textures
+  - nameParent: Audio
+    childrenFolder:
+    - Music
+    - Sound
+  - nameParent: Code
+    childrenFolder:
+    - Scripts
+    - Shaders
+  - nameParent: Docs
+    childrenFolder: []
+  - nameParent: Level
+    childrenFolder:
+    - Prefabs
+    - Scenes
+    - UI
